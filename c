@@ -164,7 +164,7 @@ void listar_candidatos (Lista* primeiro){
      Lista* atual;//Ponteiro para percorrer a lista sem perder a referência do primeiro elemento da lista.
      
      //Imprimindo os restaurantes da lista, e suas repectivas informações.
-     if(atual->linguagem=java && atual->salario<2000){
+     if(strcmp(atual->linguagem, "java") && atual->salario<=2000.0){
      	for(atual= primeiro ; atual!= NULL; atual= atual->prox){
         printf("\n  Nome: ");
         printf("%s", atual->nome);
@@ -179,12 +179,29 @@ void listar_candidatos (Lista* primeiro){
      printf("\n\n  PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
 	 }
 	 else{
-	 	printf("");
+	 	
+	 Lista *anterior= NULL;
+     Lista *atual= primeiro;
+     
+      if(anterior==NULL){
+        printf("\n  Conte%cdo exclu%cdo com sucesso.", 163,161); 
+        primeiro= atual->prox;
+     //Excluindo um restaurante do meio da lista.
+     }else{
+        printf("\n  Conte%cdo exclu%cdo com sucesso.", 163,161);
+        anterior->prox= atual->prox;
+     }
+     
+     //Desalocando o espaço da memória.
+     free(atual);
+     printf("\n\n  PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
+     return primeiro;  
+	 	
 	 }
      
 }
 
-Lista* excluir_candidatos(Lista *primeiro){
+/*Lista* excluir_candidatos(Lista *primeiro){
      
      Lista *anterior= NULL;//Ponteiro para saber o elemento anterior ao elemento atual da lista.
      Lista *atual= primeiro;//Ponteiro para percorrer a lista sem perder o primeiro elemento da lista.
@@ -196,7 +213,7 @@ Lista* excluir_candidatos(Lista *primeiro){
      scanf("%u",&codigo);
      
      //Procurando o restaurante na lista.
-     while(atual!= NULL && atual->codigo!=codigo){
+     while(atual!= NULL && atual->linguagem!=linguagem){
         anterior= atual;
         atual= atual->prox;
      }
@@ -223,34 +240,5 @@ Lista* excluir_candidatos(Lista *primeiro){
      printf("\n\n  PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
      return primeiro;     
 }
-
-//Função para alterar restaurantes.
-void alterar_candidatos(Lista* primeiro){     
-     char nome_substituto[40], endereco_substituto[40];
-     unsigned long int codigo;  
-     Lista* atual=primeiro;
-     
-     //Requisitando e lendo o código do restaurante a ser alterado.
-     printf("  C%cdigo do Candidato a ser alterado: ", 162);
-     fflush(stdin);
-     scanf("%u",&codigo);
-     
-     //Procurando o restaurante na lista.
-     while(atual!= NULL && atual->codigo!=codigo){
-        atual= atual->prox;
-     }
-     
-     //Alterando os dados do restaurante.
-     if(atual!=NULL){
-        printf("\n  Novo nome: ");
-        fflush (stdin); fgets(nome_substituto, 40, stdin); 
-        strcpy(atual->nome,nome_substituto);
-        printf("\n  Novo endere%co: ",135);
-        fflush (stdin); fgets(endereco_substituto, 40, stdin); printf ("\n");
-        strcpy(atual->endereco,endereco_substituto);
-        printf("  Dados alterados com sucesso.");
-     }else{
-        printf("\n  Candidato n%co encontrado.",198);
-     }
-     printf("\n\n\n  PRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU PRINCIPAL.");
-}
+*/
+   
